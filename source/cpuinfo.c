@@ -81,6 +81,24 @@ int get_rpi_info(rpi_info *info)
       return -1;
    fclose(fp);
 
+   /* Armbian with kernel 6.x */
+   if (!found && !aml_found) {
+      char buffer[1024];
+      char board[1024];
+      if ((fp = fopen("/etc/armbian-image-release", "r"))) {
+         while(!feof(fp) && fgets(buffer, sizeof(buffer), fp)) {
+            sscanf(buffer, "BOARD_NAME=\"%[^\"]\"", board);
+         }
+         // printf("Board=%s\n", board);
+         if (strstr(board, "Banana Pi M5")) {
+            setInfoAml("BPI-M5", (void *)info);
+            aml_found = found = 1;
+            strcpy(revision, "Unknown");
+         }
+         fclose(fp);
+      }
+   }
+
    if (aml_found) {
       strcpy(info->revision, revision);
       return 0;
