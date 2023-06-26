@@ -16,7 +16,7 @@ Bananapi M5/M2Pro/M2S/CM4 WiringPi port
 awesometic's Odroid RPi.GPIO port  
   https://github.com/awesometic/RPi.GPIO-Odroid  
 
-Upstream repository by Dangku
+Upstream repository by Dangku  
   https://github.com/Dangku/RPi.GPIO-Amlogic
   
   
